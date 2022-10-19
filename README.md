@@ -34,47 +34,23 @@ The log files in the dataset you'll be working with are partitioned by year and 
 + **log_data/2018/11/2018-11-12-events.json**
 + **log_data/2018/11/2018-11-13-events.json**
 
-
-The **Redshift** service is where data will be ingested and transformed, in fact though `COPY` command we will access to the JSON files inside the buckets and copy their content on our *staging tables*.
-
 ### Database Schema
-We have two staging tables which *copy* the JSON file inside the  **S3 buckets**.
-#### Staging Table
-+ **staging_songs** - info about songs and artists
-+ **staging_events** - actions done by users (which song are listening, etc.. )
+Star schema that contains 1 fact table (songplays) and 4 dimension tables (users, songs, artists and time).
 
+**songplays**
++ **records in log data associated with song plays i.e. records with page NextSong**
 
-I createa a star schema optimized for queries on song play analysis. This includes the following tables.
+**users**
++ ** users in the app**
 
-#### Fact Table
-+ **songplays** - records in event data associated with song plays i.e. records with page `NextSong`
+**songs**
++ **songs in music database**
 
-#### Dimension Tables
-+ **users** - users in the app
-+ **songs** - songs in music database
-+ **artists** - artists in music database
-+ **time** - timestamps of records in **songplays** broken down into specific units
+**artists**
++ **artists in music database**
 
-
-
-### Data Warehouse Configurations and Setup
-* Create a new `IAM user` in your AWS account
-* Give it AdministratorAccess and Attach policies
-* Use access key and secret key to create clients for `EC2`, `S3`, `IAM`, and `Redshift`.
-* Create an `IAM Role` that makes `Redshift` able to access `S3 bucket` (ReadOnly)
-* Create a `RedShift Cluster` and get the `DWH_ENDPOIN(Host address)` and `DWH_ROLE_ARN` and fill the config file.
-
-### ETL Pipeline
-+ Created tables to store the data from `S3 buckets`.
-+ Loading the data from `S3 buckets` to staging tables in the `Redshift Cluster`.
-+ Inserted data into fact and dimension tables from the staging tables.
-
-### Project Structure
-
-+ `create_tables.py` - This script will drop old tables (if exist) ad re-create new tables.
-+ `etl.py` - This script executes the queries that extract `JSON` data from the `S3 bucket` and ingest them to `Redshift`.
-+ `sql_queries.py` - This file contains variables with SQL statement in String formats, partitioned by `CREATE`, `DROP`, `COPY` and `INSERT` statement.
-+ `dhw.cfg` - Configuration file used that contains info about `Redshift`, `IAM` and `S3`
+**time**
++ **timestamps of records in songplays broken down into specific units**
 
 ### How to Run
 
