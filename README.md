@@ -7,11 +7,11 @@ In this project, i'll apply what i've learned on data warehouses and AWS to buil
 
 ### Datasets
 
-You'll be working with two datasets that reside in S3. Here are the S3 links for each:
+I'll be working with two datasets that reside in S3. Here are the S3 links for each:
 
-Song data: **s3://udacity-dend/song_data**
-Log data: **s3://udacity-dend/log_data**
-Log data **json path: s3://udacity-dend/log_json_path.json**
++ **Song data: **s3://udacity-dend/song_data**
++ **Log data: **s3://udacity-dend/log_data**
++ **Log data **json path: s3://udacity-dend/log_json_path.json**
 
 ### Song Dataset
 The first dataset is a subset of real data from the **Million Song Dataset**. Each file is in JSON format and contains metadata about a song and the artist of that song. The files are partitioned by the first three letters of each song's track ID. For example, here are file paths to two files in this dataset.
@@ -41,7 +41,7 @@ Star schema that contains 1 fact table (songplays) and 4 dimension tables (users
 + **records in log data associated with song plays i.e. records with page NextSong**
 
 **users**
-+ ** users in the app**
++ **users in the app**
 
 **songs**
 + **songs in music database**
